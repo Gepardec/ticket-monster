@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.jboss</groupId>
@@ -14,7 +15,6 @@
     <name>ticket-monster</name>
     <description>A starter HTML5 + REST webapp project for use on JBoss EAP.</description>
 
-   
 
     <properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -49,7 +49,7 @@
                 -->
             <dependency>
                 <groupId>org.wildfly.bom</groupId>
-               <artifactId>wildfly-javaee7-with-tools</artifactId>
+                <artifactId>wildfly-javaee7-with-tools</artifactId>
                 <version>${version.wildfly.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -69,19 +69,19 @@
             <artifactId>cdi-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <scope>provided</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <scope>provided</scope>
         </dependency>
-       
+
         <!-- Import the Common Annotations API (JSR-250), we use provided 
             scope as the API is included in JBoss EAP -->
         <dependency>
@@ -170,7 +170,7 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-depchain</artifactId>
@@ -205,7 +205,7 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>${version.war.plugin}</version>
                     <configuration>
-                    	<failOnMissingWebXml>false</failOnMissingWebXml>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
                         <!--<archive>
                             <manifestEntries>
                                 <Dependencies>org.jboss.as.naming,org.jboss.as.server,org.jboss.msc</Dependencies>
@@ -281,70 +281,7 @@
             </dependencies>
         </profile>
 
-        <profile>
-            <!-- An optional profile that produces a WAR to be used 
-                with a PostgreSQL cartridge on OpenShift -->
-            <id>postgresql-openshift</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources-postgresql-openshift</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <includes>
-                            <include>**/*</include>
-                        </includes>
-                        <excludes>
-                            <exclude>META-INF/*</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${version.surefire.plugin}</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
 
-        <profile>
-            <!-- An optional profile that produces a WAR to be used 
-                with a MySQL cartridge on OpenShift -->
-            <id>mysql-openshift</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources-mysql-openshift</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <includes>
-                            <include>**/*</include>
-                        </includes>
-                        <excludes>
-                            <exclude>META-INF/*</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>${version.surefire.plugin}</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        
         <profile>
             <!-- An optional profile that enables a server managed postgresql data source-->
             <id>postgresql</id>
@@ -438,23 +375,44 @@
                 </plugins>
             </build>
         </profile>
-
         <profile>
-            <!-- When built in OpenShift the 'openshift' profile will be used when invoking mvn. -->
-            <!-- Use this profile for any OpenShift specific customization your app will need. -->
-            <!-- By default that is to put the resulting archive into the 'deployments' folder. -->
-            <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <build>
+                <finalName>ROOT</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>s2i</id>
+            <build>
+                <finalName>ROOT</finalName>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-war-plugin</artifactId>
-                        <version>${version.war.plugin}</version>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>fabric8-maven-plugin</artifactId>
+                        <version>3.2.28</version>
                         <configuration>
-                            <outputDirectory>deployments</outputDirectory>
-                            <warName>ROOT</warName>
+                            <images>
+                                <image>
+                                    <name>ticket-monster</name>
+                                    <build>
+                                        <from>openshift/wildfly-101-centos7</from>
+                                        <assembly>
+                                            <basedir>/opt/app-root/src/</basedir>
+                                            <descriptorRef>artifact</descriptorRef>
+                                        </assembly>
+                                    </build>
+                                </image>
+                            </images>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>resource</goal>
+                                    <goal>build</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
