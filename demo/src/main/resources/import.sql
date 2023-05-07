@@ -1,11 +1,11 @@
 -- MediaItem 0
-insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://dl.dropbox.com/u/65660684/640px-Weir%2C_Bob_(2007)_2.jpg')
+insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Bobby_Weir.jpg/440px-Bobby_Weir.jpg')
 -- MediaItem 1
 insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://dl.dropbox.com/u/65660684/640px-Carnival_Puppets.jpg')
 -- MediaItem 2
-insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://dl.dropbox.com/u/65660684/640px-Opera_House_with_Sydney.jpg')
+insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Australia._%2821339175489%29.jpg')
 -- MediaItem 3
-insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://dl.dropbox.com/u/65660684/640px-Roy_Thomson_Hall_Toronto.jpg')
+insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://upload.wikimedia.org/wikipedia/commons/d/dc/Shiny_buildings_in_Toronto.jpg')
 -- MediaItem 4
 insert into MediaItem ( mediaType, url) values ( 'IMAGE', 'https://dl.dropbox.com/u/65660684/640px-West-stand-bmo-field.jpg')
 -- MediaItem 5
