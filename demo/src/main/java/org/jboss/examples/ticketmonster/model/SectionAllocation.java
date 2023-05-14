@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -107,6 +108,7 @@ public class SectionAllocation implements Serializable {
      * </p>
      */
     @Lob
+    @Column(columnDefinition="BLOB")
     private long[][] allocated;
 
     /**
