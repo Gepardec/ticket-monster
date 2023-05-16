@@ -103,7 +103,9 @@ public abstract class BaseEntityService<T> {
         final CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
         Predicate[] predicates = extractPredicates(queryParameters, criteriaBuilder, root);
-        criteriaQuery.select(criteriaQuery.getSelection()).where(predicates);
+        if ( predicates.length != 0) {
+            criteriaQuery.select(criteriaQuery.getSelection()).where(predicates);
+        }
         criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
         TypedQuery<T> query = entityManager.createQuery(criteriaQuery);
         if (queryParameters.containsKey("first")) {
@@ -169,7 +171,7 @@ public abstract class BaseEntityService<T> {
         final CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
         Root<T> root = criteriaQuery.from(entityClass);
         Predicate condition = criteriaBuilder.equal(root.get("id"), id);
-        criteriaQuery.select(criteriaBuilder.createQuery(entityClass).getSelection()).where(condition);
+        criteriaQuery.select(root).where(condition);
         return entityManager.createQuery(criteriaQuery).getSingleResult();
     }
 }
