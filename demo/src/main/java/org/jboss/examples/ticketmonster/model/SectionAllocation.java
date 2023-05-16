@@ -3,6 +3,11 @@ package org.jboss.examples.ticketmonster.model;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +21,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PostLoad;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Version;
 import jakarta.validation.constraints.NotNull;
@@ -109,7 +115,28 @@ public class SectionAllocation implements Serializable {
      */
     @Lob
     @Column(columnDefinition="BLOB")
-    private long[][] allocated;
+    private byte[] allocated;
+    
+    
+    public byte[] getAllocated() throws IOException {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream(); 
+                ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+               oos.writeObject(allocated_intern);
+               allocated = bos.toByteArray();
+           }
+        return allocated;
+    }
+
+    public void setAllocated(byte[] allocated) throws IOException, ClassNotFoundException {
+        try (ByteArrayInputStream bis = new ByteArrayInputStream(allocated);
+                ObjectInputStream ois = new ObjectInputStream(bis)) {
+               allocated_intern = (long[][]) ois.readObject();
+        }
+        this.allocated = allocated;
+    }
+
+    @Transient
+    private long[][] allocated_intern;
 
     /**
      * <p>
@@ -132,8 +159,8 @@ public class SectionAllocation implements Serializable {
     public SectionAllocation(Performance performance, Section section) {
         this.performance = performance;
         this.section = section;
-        this.allocated = new long[section.getNumberOfRows()][section.getRowCapacity()];
-        for (long[] seatStates : allocated) {
+        this.allocated_intern = new long[section.getNumberOfRows()][section.getRowCapacity()];
+        for (long[] seatStates : allocated_intern) {
             Arrays.fill(seatStates, 0l);
         }
     }
@@ -144,9 +171,9 @@ public class SectionAllocation implements Serializable {
      */
     @PostLoad
     void initialize() {
-    	if (this.allocated == null) {
-    		this.allocated = new long[this.section.getNumberOfRows()][this.section.getRowCapacity()];
-            for (long[] seatStates : allocated) {
+    	if (this.allocated_intern == null) {
+    		this.allocated_intern = new long[this.section.getNumberOfRows()][this.section.getRowCapacity()];
+            for (long[] seatStates : allocated_intern) {
                 Arrays.fill(seatStates, 0l);
             }
         }
@@ -159,7 +186,7 @@ public class SectionAllocation implements Serializable {
      */
     public boolean isAllocated(Seat s) {
         // Examine the allocation matrix, using the row and seat number as indices
-        return allocated[s.getRowNumber() - 1][s.getNumber() - 1] != 0;
+        return allocated_intern[s.getRowNumber() - 1][s.getNumber() - 1] != 0;
     }
 
     /**
@@ -235,7 +262,7 @@ public class SectionAllocation implements Serializable {
     private int findFreeGapStart(int row, int startSeat, int size) {
 
         // An array of occupied seats in the row
-        long[] occupied = allocated[row];
+        long[] occupied = allocated_intern[row];
         int candidateStart = -1;
 
         // Iterate over the seats, and locate the first free seat block
@@ -270,7 +297,7 @@ public class SectionAllocation implements Serializable {
      * @throws SeatAllocationException if the seats are already occupied.
      */
     private void allocate(int row, int start, int size, long finalState) throws SeatAllocationException {
-        long[] occupied = allocated[row];
+        long[] occupied = allocated_intern[row];
         if (size <= 0) {
             throw new SeatAllocationException("Number of seats must be greater than zero");
         }
@@ -298,7 +325,7 @@ public class SectionAllocation implements Serializable {
         if (!isAllocated(seat)) {
             throw new SeatAllocationException("Trying to deallocate an unallocated seat!");
         }
-        this.allocated[seat.getRowNumber()-1][seat.getNumber()-1] = 0;
+        this.allocated_intern[seat.getRowNumber()-1][seat.getNumber()-1] = 0;
         occupiedCount --;
     }
 
