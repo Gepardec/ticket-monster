@@ -114,7 +114,6 @@ public class SectionAllocation implements Serializable {
      * </p>
      */
     @Lob
-    @Column(columnDefinition="BLOB")
     private byte[] allocated;
     
     
