@@ -2,17 +2,17 @@ package org.jboss.examples.ticketmonster.service;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.NoResultException;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.NoResultException;
 
 import org.jboss.examples.ticketmonster.model.Performance;
 import org.jboss.examples.ticketmonster.model.Seat;
 import org.jboss.examples.ticketmonster.model.SeatAllocationException;
 import org.jboss.examples.ticketmonster.model.Section;
 import org.jboss.examples.ticketmonster.model.SectionAllocation;
-import org.jboss.examples.ticketmonster.service.AllocatedSeats;
 
 /**
  *
@@ -21,6 +21,7 @@ import org.jboss.examples.ticketmonster.service.AllocatedSeats;
  * @author Marius Bogoevici
  */
 @SuppressWarnings("serial")
+@ApplicationScoped
 public class SeatAllocationService {
 
     @Inject

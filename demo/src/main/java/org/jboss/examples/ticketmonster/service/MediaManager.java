@@ -18,7 +18,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.RequestScoped;
 
 import org.jboss.examples.ticketmonster.model.MediaItem;
 import org.jboss.examples.ticketmonster.model.MediaType;

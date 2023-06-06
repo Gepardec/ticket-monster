@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 import org.jboss.examples.ticketmonster.model.Show;
 
