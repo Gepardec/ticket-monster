@@ -26,7 +26,7 @@
         <!-- You can reference property in pom.xml or filtered resources 
             (must enable third-party plugin if using Maven < 2.1) -->
         <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-        <maven.compiler.release>8</maven.compiler.release>
+        <maven.compiler.release>11</maven.compiler.release>
         <!-- Specify the JBoss AS directory to be the JBOSS_HOME environment 
             variable -->
         <jboss.home>${env.JBOSS_HOME}</jboss.home>
