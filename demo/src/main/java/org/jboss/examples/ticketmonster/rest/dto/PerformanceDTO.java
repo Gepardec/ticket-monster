@@ -5,7 +5,7 @@ import org.jboss.examples.ticketmonster.model.Performance;
 import jakarta.persistence.EntityManager;
 import org.jboss.examples.ticketmonster.rest.dto.NestedShowDTO;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class PerformanceDTO implements Serializable

@@ -5,7 +5,7 @@ import org.jboss.examples.ticketmonster.model.Ticket;
 import jakarta.persistence.EntityManager;
 import org.jboss.examples.ticketmonster.rest.dto.NestedTicketCategoryDTO;
 import org.jboss.examples.ticketmonster.rest.dto.SeatDTO;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class TicketDTO implements Serializable

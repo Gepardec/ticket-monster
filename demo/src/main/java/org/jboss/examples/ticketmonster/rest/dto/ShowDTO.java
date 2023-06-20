@@ -27,7 +27,7 @@ import org.jboss.examples.ticketmonster.rest.dto.NestedVenueDTO;
 import org.jboss.examples.ticketmonster.rest.dto.NestedTicketPriceDTO;
 import org.jboss.examples.ticketmonster.model.TicketPrice;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ShowDTO implements Serializable
