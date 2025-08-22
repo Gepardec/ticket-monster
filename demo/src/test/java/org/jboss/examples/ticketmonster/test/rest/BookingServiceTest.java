@@ -24,7 +24,7 @@ import org.jboss.examples.ticketmonster.rest.*;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Assert;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)

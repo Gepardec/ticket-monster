@@ -18,7 +18,7 @@ import org.jboss.examples.ticketmonster.rest.MediaService;
 import org.jboss.examples.ticketmonster.service.MediaManager;
 import org.jboss.examples.ticketmonster.service.MediaPath;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
