@@ -6,8 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
+import io.quarkus.scheduler.Scheduler;
+import io.quarkus.scheduler.Trigger;
 import jakarta.ejb.Stateless;
 import jakarta.ejb.Timeout;
 import jakarta.ejb.Timer;
@@ -18,7 +19,6 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.Response;
 
-import jakarta.annotation.Resource;
 import org.jboss.examples.ticketmonster.model.Performance;
 import org.jboss.examples.ticketmonster.model.Show;
 import org.jboss.examples.ticketmonster.model.TicketPrice;
@@ -31,7 +31,7 @@ public class Bot {
     private static final Random random = new Random(System.nanoTime());
     
     /** Frequency with which the bot will book **/
-    public static final long DURATION = TimeUnit.SECONDS.toMillis(3);
+    public static final long DURATION = 3L;
     
     /** Maximum number of ticket requests that will be filed **/
     public static int MAX_TICKET_REQUESTS = 100;
@@ -49,28 +49,35 @@ public class Bot {
     
     @Inject @BotMessage
     Event<String> event;
+
+    @Inject
+    private Scheduler scheduler;
     
-    @Resource
-    private TimerService timerService;
-    
-    public Timer start() {
+    public Trigger start() {
         String startMessage = new StringBuilder("==========================\n")
                 .append("Bot started at ").append(new Date().toString()).append("\n")
                 .toString();
         event.fire(startMessage);
-        return timerService.createIntervalTimer(0, DURATION, new TimerConfig(null, false));
+        return scheduler
+                .newJob("interval")
+                .setCron("*/%d * * * *".formatted(DURATION))
+                .setTask(_unused -> book())
+                .schedule();
     }
-    
-    public void stop(Timer timer) {
+
+    public void stop() {
         String stopMessage = new StringBuilder("==========================\n")
                 .append("Bot stopped at ").append(new Date().toString()).append("\n")
                 .toString();
         event.fire(stopMessage);
-        timer.cancel();
+        scheduler.unscheduleJob("interval");
+    }
+
+    public boolean isActive() {
+        return scheduler.getScheduledJob("interval") != null;
     }
     
-    @Timeout
-    public void book(Timer timer) {
+    public void book() {
         // Select a show at random
         Show show = selectAtRandom(showService.getAll(new MultivaluedHashMap<>()));
 

@@ -3,6 +3,8 @@ package org.jboss.examples.ticketmonster.service;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Logger;
 
 import jakarta.ejb.Timer;
@@ -46,28 +48,20 @@ public class BotService {
     @BotMessage
     private Event<String> event;
 
-    private Timer timer;
-
     public BotService() {
         log = new CircularBuffer<String>(MAX_LOG_SIZE);
     }
 
     public void start() {
         synchronized (bot) {
-            if (timer == null) {
-                logger.info("Starting bot");
-                timer = bot.start();
-            }
+            logger.info("Starting bot");
         }
     }
 
     public void stop() {
         synchronized (bot) {
-            if (timer != null) {
-                logger.info("Stopping bot");
-                bot.stop(timer);
-                timer = null;
-            }
+            logger.info("Stopping bot");
+            bot.stop();
         }
     }
 
@@ -101,7 +95,9 @@ public class BotService {
     }
 
     public boolean isBotActive() {
-        return (timer != null);
+        synchronized (bot) {
+            return bot.isActive();
+        }
     }
 
 }
