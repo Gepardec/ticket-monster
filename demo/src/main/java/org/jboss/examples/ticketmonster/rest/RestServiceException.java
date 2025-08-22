@@ -1,6 +1,5 @@
 package org.jboss.examples.ticketmonster.rest;
 
-import jakarta.ejb.ApplicationException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;
 
