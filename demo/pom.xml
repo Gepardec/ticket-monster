@@ -63,6 +63,11 @@
             Transactional(JTA) JPA from JUnit/TestNG -->
         <dependency>
             <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-junit5</artifactId>
             <scope>test</scope>
         </dependency>
@@ -72,7 +77,6 @@
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
