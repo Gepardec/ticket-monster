@@ -1,9 +1,10 @@
 package org.jboss.examples.ticketmonster.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.logging.Logger;
 
-import jakarta.ejb.Asynchronous;
 import jakarta.ejb.Timer;
 import jakarta.enterprise.event.Event;
 import jakarta.enterprise.event.Observes;
@@ -11,6 +12,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 
+import org.eclipse.microprofile.faulttolerance.Asynchronous;
 import org.jboss.examples.ticketmonster.model.Booking;
 import org.jboss.examples.ticketmonster.rest.BookingService;
 import org.jboss.examples.ticketmonster.util.CircularBuffer;
@@ -70,8 +72,8 @@ public class BotService {
     }
 
     @Asynchronous
-    public void deleteAll() {
-        synchronized (bot) {
+    public CompletionStage<Void> deleteAll() {
+        return CompletableFuture.runAsync(() -> {   synchronized (bot) {
             stop();
             // Delete 10 bookings at a time
             while(true) {
@@ -87,7 +89,7 @@ public class BotService {
                     break;
                 }
             }
-        }
+        }});
     }
 
     public void newBookingRequest(@Observes @BotMessage String bookingRequest) {
