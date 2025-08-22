@@ -23,7 +23,7 @@ import org.jboss.examples.ticketmonster.model.TicketPrice;
 import org.jboss.examples.ticketmonster.rest.*;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Assertions;
-import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
@@ -54,7 +54,7 @@ public class BookingServiceTest {
         bookingService.createBooking(br3);
     }
 
-    @Test @Ignore
+    @Test @Disabled
     @InSequence(10)
     public void testGetBookings() {
         checkBooking1();
