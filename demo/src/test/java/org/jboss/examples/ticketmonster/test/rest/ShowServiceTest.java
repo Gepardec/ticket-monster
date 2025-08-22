@@ -14,7 +14,7 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.examples.ticketmonster.model.Show;
 import org.jboss.examples.ticketmonster.rest.ShowService;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.jupiter.api.Test;;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
