@@ -185,7 +185,7 @@ public class BookingServiceTest {
         }
         System.out.println(bookedTickets);
         for (String requiredTicket : requiredTickets) {
-            Assert.assertTrue("Required ticket not present: " + requiredTicket, bookedTickets.contains(requiredTicket));
+            Assertions.assertTrue(bookedTickets.contains(requiredTicket), "Required ticket not present: " + requiredTicket);
         }
     }
 
