@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.validation.ConstraintViolation;
@@ -49,7 +49,7 @@ import org.jboss.examples.ticketmonster.util.qualifier.Created;
  *     This is a stateless service, we declare it as an EJB for transaction demarcation
  * </p>
  */
-@Stateless
+@ApplicationScoped
 public class BookingService extends BaseEntityService<Booking> {
 
     @Inject

@@ -3,7 +3,7 @@ package org.jboss.examples.ticketmonster.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.OptimisticLockException;
@@ -35,7 +35,7 @@ import org.jboss.examples.ticketmonster.model.Show;
 /**
  * 
  */
-@Stateless
+@ApplicationScoped
 @Path("/performances")
 public class PerformanceEndpoint
 {

@@ -9,7 +9,7 @@ import java.util.Random;
 
 import io.quarkus.scheduler.Scheduler;
 import io.quarkus.scheduler.Trigger;
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ejb.Timeout;
 import jakarta.ejb.Timer;
 import jakarta.ejb.TimerConfig;
@@ -25,7 +25,7 @@ import org.jboss.examples.ticketmonster.model.TicketPrice;
 import org.jboss.examples.ticketmonster.rest.*;
 import org.jboss.examples.ticketmonster.util.qualifier.BotMessage;
 
-@Stateless
+@ApplicationScoped
 public class Bot {
     
     private static final Random random = new Random(System.nanoTime());

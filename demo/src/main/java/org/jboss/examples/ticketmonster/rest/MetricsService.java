@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.ejb.Stateless;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -24,7 +24,7 @@ import org.jboss.examples.ticketmonster.model.Show;
  * 
  */
 @Path("/metrics")
-@Stateless
+@ApplicationScoped
 public class MetricsService {
 
     @Inject
