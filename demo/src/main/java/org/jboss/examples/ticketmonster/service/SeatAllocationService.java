@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.NoResultException;
 
+import jakarta.transaction.Transactional;
 import org.jboss.examples.ticketmonster.model.Performance;
 import org.jboss.examples.ticketmonster.model.Seat;
 import org.jboss.examples.ticketmonster.model.SeatAllocationException;
@@ -33,6 +34,7 @@ public class SeatAllocationService {
         return new AllocatedSeats(sectionAllocation, seats);
     }
 
+    @Transactional(rollbackOn = SeatAllocationException.class)
     public void deallocateSeats(Section section, Performance performance, List<Seat> seats) {
         SectionAllocation sectionAllocation = retrieveSectionAllocationExclusively(section, performance);
         for (Seat seat : seats) {

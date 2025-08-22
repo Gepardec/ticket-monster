@@ -24,6 +24,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.persistence.Version;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -295,6 +296,7 @@ public class SectionAllocation implements Serializable {
      * @throws SeatAllocationException if the last seat to allocate is more than the number of seats in the row
      * @throws SeatAllocationException if the seats are already occupied.
      */
+    @Transactional(rollbackOn = SeatAllocationException.class)
     private void allocate(int row, int start, int size, long finalState) throws SeatAllocationException {
         long[] occupied = allocated_intern[row];
         if (size <= 0) {

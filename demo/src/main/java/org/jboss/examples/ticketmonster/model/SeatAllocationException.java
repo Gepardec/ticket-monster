@@ -1,7 +1,5 @@
 package org.jboss.examples.ticketmonster.model;
 
-import jakarta.ejb.ApplicationException;
-
 /**
  * <p>
  * The exception thrown if an error occurs in seat allocation.
@@ -14,7 +12,6 @@ import jakarta.ejb.ApplicationException;
  * @author Marius Bogoevici
  */
 @SuppressWarnings("serial")
-@ApplicationException(rollback = true)
 public class SeatAllocationException extends RuntimeException {
 
     public SeatAllocationException() {
