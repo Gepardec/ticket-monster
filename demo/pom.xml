@@ -9,7 +9,6 @@
     <groupId>org.jboss.examples</groupId>
     <artifactId>ticket-monster</artifactId>
     <version>3.0.0.Final-SNAPSHOT</version>
-    <packaging>war</packaging>
     <name>ticket-monster</name>
     <description>A starter HTML5 + REST webapp project for use on JBoss EAP.</description>
 
