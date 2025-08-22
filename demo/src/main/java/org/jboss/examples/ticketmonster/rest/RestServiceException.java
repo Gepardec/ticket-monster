@@ -15,7 +15,6 @@ import jakarta.ws.rs.core.Response;
  * </p>
  * @author Marius Bogoevici
  */
-@ApplicationException(inherited = true, rollback = true)
 public class RestServiceException extends WebApplicationException {
 
     public RestServiceException() {

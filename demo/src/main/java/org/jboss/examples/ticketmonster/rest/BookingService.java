@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.ws.rs.Consumes;
@@ -121,6 +122,7 @@ public class BookingService extends BaseEntityService<Booking> {
      * {@link BookingRequest} class.
      */
     @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional(rollbackOn = RestServiceException.class)
     public Response createBooking(BookingRequest bookingRequest) {
         try {
             // identify the ticket price categories in this request
