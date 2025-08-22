@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.List;
 
+import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
@@ -15,9 +16,9 @@ import org.jboss.examples.ticketmonster.model.Show;
 import org.jboss.examples.ticketmonster.rest.ShowService;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import io.quarkus.test.junit.QuarkusTest;
 
-@RunWith(Arquillian.class)
+@QuarkusTest
 public class ShowServiceTest {
     
     @Deployment

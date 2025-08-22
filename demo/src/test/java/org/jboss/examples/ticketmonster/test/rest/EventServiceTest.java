@@ -19,9 +19,9 @@ import org.jboss.examples.ticketmonster.service.MediaManager;
 import org.jboss.examples.ticketmonster.service.MediaPath;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import io.quarkus.test.junit.QuarkusTest;
 
-@RunWith(Arquillian.class)
+@QuarkusTest
 public class EventServiceTest {
     
     @Deployment

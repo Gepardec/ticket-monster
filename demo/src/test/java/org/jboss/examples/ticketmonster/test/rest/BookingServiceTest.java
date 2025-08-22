@@ -25,9 +25,9 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import io.quarkus.test.junit.QuarkusTest;
 
-@RunWith(Arquillian.class)
+@QuarkusTest
 public class BookingServiceTest {
 
     @Deployment
