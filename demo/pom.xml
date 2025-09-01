@@ -102,7 +102,11 @@
             <artifactId>rest-assured</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-h2</artifactId>
+            <version>3.23.2</version>
+        </dependency>
     </dependencies>
 
     <build>
