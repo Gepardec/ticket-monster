@@ -56,6 +56,11 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-orm</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm-panache</artifactId>
+            <version>3.23.2</version>
+        </dependency>
 
         <!-- Optional, but highly recommended -->
         <!-- Arquillian allows you to test enterprise code such as EJBs and 
