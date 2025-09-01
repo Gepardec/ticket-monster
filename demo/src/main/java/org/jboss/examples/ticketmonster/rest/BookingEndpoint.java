@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.Booking;
 @Path("forge/bookings")
 public class BookingEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

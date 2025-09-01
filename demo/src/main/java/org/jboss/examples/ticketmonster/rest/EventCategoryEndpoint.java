@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.EventCategory;
 @Path("/eventcategories")
 public class EventCategoryEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

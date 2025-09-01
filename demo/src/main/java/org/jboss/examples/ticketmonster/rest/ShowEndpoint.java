@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.Show;
 @Path("forge/shows")
 public class ShowEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

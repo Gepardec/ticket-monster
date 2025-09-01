@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.TicketPrice;
 @Path("/ticketprices")
 public class TicketPriceEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

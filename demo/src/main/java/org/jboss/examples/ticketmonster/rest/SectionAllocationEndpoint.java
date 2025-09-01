@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.SectionAllocation;
 @Path("/sectionallocations")
 public class SectionAllocationEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.MediaItem;
 @Path("/mediaitems")
 public class MediaItemEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

@@ -39,7 +39,7 @@ import org.jboss.examples.ticketmonster.model.Show;
 @Path("/performances")
 public class PerformanceEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST

@@ -31,7 +31,7 @@ import org.jboss.examples.ticketmonster.model.Section;
 @Path("/sections")
 public class SectionEndpoint
 {
-   @PersistenceContext(unitName = "primary")
+   @PersistenceContext
    private EntityManager em;
 
    @POST
