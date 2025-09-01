@@ -10,8 +10,7 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+
 import org.jboss.examples.ticketmonster.model.Show;
 import org.jboss.examples.ticketmonster.rest.ShowService;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -20,11 +19,7 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class ShowServiceTest {
-    
-    @Deployment
-    public static WebArchive deployment() {
-        return RESTDeployment.deployment();
-    }
+
    
     @Inject
     private ShowService showService;

@@ -12,9 +12,6 @@ import jakarta.persistence.NoResultException;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.junit.InSequence;
 import org.jboss.examples.ticketmonster.model.Booking;
 import org.jboss.examples.ticketmonster.model.Performance;
 import org.jboss.examples.ticketmonster.model.Show;
@@ -30,10 +27,6 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class BookingServiceTest {
 
-    @Deployment
-    public static WebArchive deployment() {
-        return RESTDeployment.deployment();
-    }
 
     @Inject
     private BookingService bookingService;
@@ -42,7 +35,6 @@ public class BookingServiceTest {
     private ShowService showService;
 
     @Test
-    @InSequence(1)
     public void testCreateBookings() {
         BookingRequest br = createBookingRequest(1l, 0, new int[]{4, 1}, new int[]{1,1}, new int[]{3,1});
         bookingService.createBooking(br);
@@ -55,7 +47,6 @@ public class BookingServiceTest {
     }
 
     @Test @Disabled
-    @InSequence(10)
     public void testGetBookings() {
         checkBooking1();
         checkBooking2();
@@ -122,7 +113,6 @@ public class BookingServiceTest {
     }
 
     @Test
-    @InSequence(10)
     public void testPagination() {
 
         // Test pagination logic
@@ -139,7 +129,6 @@ public class BookingServiceTest {
     }
 
     @Test
-    @InSequence(20)
     public void testDelete() {
         bookingService.deleteBooking(2l);
         checkBooking1();

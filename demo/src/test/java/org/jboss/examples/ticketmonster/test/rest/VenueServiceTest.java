@@ -10,21 +10,15 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
+
 import org.jboss.examples.ticketmonster.model.Venue;
 import org.jboss.examples.ticketmonster.rest.VenueService;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class VenueServiceTest {
-    
-    @Deployment
-    public static WebArchive deployment() {
-        return RESTDeployment.deployment();
-    }
+
    
     @Inject
     private VenueService venueService;
